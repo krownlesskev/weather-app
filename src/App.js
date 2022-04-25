@@ -1,8 +1,8 @@
 // Using axios to handle get requests for APIs
 import Axios from 'axios';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const WeatherComponent = () => {
+const WeatherComponent = (currentMinTemp, currentMaxTemp) => {
   const currentDate = new Date();
   const dayOfTheWeekNumber = currentDate.getDay();
   let dayOfTheWeek = '';
@@ -42,17 +42,19 @@ const WeatherComponent = () => {
 
 function App() {
   const apiKey = '3f6820661329be846a6d89b4fa860d8f';
+  const [minTemp, setMinTemp] = useState();
+  const [maxTemp, setMaxTemp] = useState();
+  const [weatherIcon, setWeatherIcon] = useState();
+
 
   // This API call will run when the App component is rendered
   // Once it is run, it will pull data from the API and assign it appropriate variables
   useEffect(() => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Winnipeg&appid=${apiKey}&units=metric`)
       .then((res) => {
-        const response = res.data;
-        const currentMinTemp = res.data.main.temp_min;
-        const currentMaxTemp = res.data.main.temp_max;
-        const weatherIcon = res.data.weather.icon;
-        console.log(res.data);
+        setMinTemp(res.data.main.temp_min);
+        setMaxTemp(res.data.main.temp_max);
+        setWeatherIcon(res.data.weather[0].icon);
       });
   }, []);
 
