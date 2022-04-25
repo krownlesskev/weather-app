@@ -2,7 +2,7 @@
 import Axios from 'axios';
 import { useState, useEffect } from 'react';
 
-const WeatherComponent = (currentMinTemp, currentMaxTemp) => {
+const WeatherComponent = ({ minTemp, maxTemp, weatherIcon }) => {
   const currentDate = new Date();
   const dayOfTheWeekNumber = currentDate.getDay();
   let dayOfTheWeek = '';
@@ -13,27 +13,34 @@ const WeatherComponent = (currentMinTemp, currentMaxTemp) => {
     case 1:
       dayOfTheWeek = 'Mon';
       break;
-    case 1:
+    case 2:
       dayOfTheWeek = 'Tue';
       break;
-    case 1:
+    case 3:
       dayOfTheWeek = 'Wed';
       break;
-    case 1:
+    case 4:
       dayOfTheWeek = 'Thu';
       break;
-    case 1:
+    case 5:
       dayOfTheWeek = 'Fri';
       break;
+    case 6:
+      dayOfTheWeek = 'Sat';
+      break;
+    default:
+      return 'error';
   }
 
   return (
     <div>
       <h1 className='day-of-the-week'>{dayOfTheWeek}</h1>
-      <div className='weather-icon'></div>
+      <div className='weather-icon'>
+        <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="Weather Icon" />
+      </div>
       <div>
-        <p className='min-temp'></p>
-        <p className='max-temp'></p>
+        <p className='min-temp'>{minTemp}</p>
+        <p className='max-temp'>{maxTemp}</p>
       </div>
     </div>
   );
@@ -42,9 +49,9 @@ const WeatherComponent = (currentMinTemp, currentMaxTemp) => {
 
 function App() {
   const apiKey = '3f6820661329be846a6d89b4fa860d8f';
-  const [minTemp, setMinTemp] = useState();
-  const [maxTemp, setMaxTemp] = useState();
-  const [weatherIcon, setWeatherIcon] = useState();
+  const [minTemp, setMinTemp] = useState(0);
+  const [maxTemp, setMaxTemp] = useState(0);
+  const [weatherIcon, setWeatherIcon] = useState('');
 
 
   // This API call will run when the App component is rendered
@@ -62,7 +69,7 @@ function App() {
 
   return (
     <div>
-      <WeatherComponent />
+      <WeatherComponent minTemp={minTemp} maxTemp={maxTemp} weatherIcon={weatherIcon} />
     </div>
   );
 }
