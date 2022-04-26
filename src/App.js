@@ -4,35 +4,57 @@ import { useState, useEffect } from 'react';
 import './styles.scss';
 
 
-const WeatherComponent = ({ minTemp, maxTemp, weatherIcon }) => {
+const WeatherComponent = ({
+  minTemp,
+  maxTemp,
+  weatherIcon,
+  day0,
+  day1,
+  day2,
+  day3,
+}) => {
   const currentDate = new Date();
-  const dayOfTheWeekNumber = currentDate.getDay();
-  let dayOfTheWeek = '';
+  let currentDayOfTheWeekNumber = currentDate.getDay();
+  let currentDayOfTheWeek = '';
+
+
+  // This if statement determines which day of the week it is based on the day# prop passed to the component
+  if (day0) {
+    currentDayOfTheWeekNumber = currentDate.getDay() + 1;
+  } else if (day1) {
+    currentDayOfTheWeekNumber = currentDate.getDay() + 2;
+  } else if (day2) {
+    currentDayOfTheWeekNumber = currentDate.getDay() + 3;
+  } else if (day3) {
+    currentDayOfTheWeekNumber = currentDate.getDay() + 4;
+  }
+
+
 
   // This switch statement works in correalation with the IMG tag below, the url acts as a get request
   // The IMG tag determines what Icon to render based on the day of the week it is
   // in the location of the city.
-  switch (dayOfTheWeekNumber) {
+  switch (currentDayOfTheWeekNumber) {
     case 0:
-      dayOfTheWeek = 'Sun';
+      currentDayOfTheWeek = 'Sun';
       break;
     case 1:
-      dayOfTheWeek = 'Mon';
+      currentDayOfTheWeek = 'Mon';
       break;
     case 2:
-      dayOfTheWeek = 'Tue';
+      currentDayOfTheWeek = 'Tue';
       break;
     case 3:
-      dayOfTheWeek = 'Wed';
+      currentDayOfTheWeek = 'Wed';
       break;
     case 4:
-      dayOfTheWeek = 'Thu';
+      currentDayOfTheWeek = 'Thu';
       break;
     case 5:
-      dayOfTheWeek = 'Fri';
+      currentDayOfTheWeek = 'Fri';
       break;
     case 6:
-      dayOfTheWeek = 'Sat';
+      currentDayOfTheWeek = 'Sat';
       break;
     default:
       return 'error';
@@ -40,7 +62,7 @@ const WeatherComponent = ({ minTemp, maxTemp, weatherIcon }) => {
 
   return (
     <div className='weather-component-container'>
-      <h1>{dayOfTheWeek}</h1>
+      <h1>{currentDayOfTheWeek}</h1>
       <div className='weather-icon'>
         <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="Weather Icon" />
       </div>
@@ -121,11 +143,11 @@ function App() {
   return (
     <div className='app-container'>
       {/* The Weather Component takes the states defined above and uses them as props */}
-      <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon} />
-      <WeatherComponent minTemp={minTemp0} maxTemp={maxTemp0} weatherIcon={weatherIcon0} />
-      <WeatherComponent minTemp={minTemp1} maxTemp={maxTemp1} weatherIcon={weatherIcon1} />
-      <WeatherComponent minTemp={minTemp2} maxTemp={maxTemp2} weatherIcon={weatherIcon2} />
-      <WeatherComponent minTemp={minTemp3} maxTemp={maxTemp3} weatherIcon={weatherIcon3} />
+      <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon}/>
+      <WeatherComponent minTemp={minTemp0} maxTemp={maxTemp0} weatherIcon={weatherIcon0} day0 />
+      <WeatherComponent minTemp={minTemp1} maxTemp={maxTemp1} weatherIcon={weatherIcon1} day1 />
+      <WeatherComponent minTemp={minTemp2} maxTemp={maxTemp2} weatherIcon={weatherIcon2} day2 />
+      <WeatherComponent minTemp={minTemp3} maxTemp={maxTemp3} weatherIcon={weatherIcon3} day3 />
     </div>
   );
 }
