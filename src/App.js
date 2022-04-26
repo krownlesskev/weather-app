@@ -85,7 +85,6 @@ to render a weather component on the App */
   useEffect(() => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Winnipeg&appid=${apiKey}&units=metric`)
       .then((res) => {
-        console.log(res.data);
         setCurrentMinTemp(res.data.main.temp_min);
         setCurrentMaxTemp(res.data.main.temp_max);
         setCurrentWeatherIcon(res.data.weather[0].icon)
