@@ -40,13 +40,13 @@ const WeatherComponent = ({ minTemp, maxTemp, weatherIcon }) => {
 
   return (
     <div className='weather-component-container'>
-      <h1 className='day-of-the-week'>{dayOfTheWeek}</h1>
+      <h1>{dayOfTheWeek}</h1>
       <div className='weather-icon'>
         <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="Weather Icon" />
       </div>
-      <div>
-        <p className='min-temp'>{minTemp}</p>
-        <p className='max-temp'>{maxTemp}</p>
+      <div className='min-max-container'>
+        <p className='max-temp'>{maxTemp}&#730;</p>
+        <p className='min-temp'>{minTemp}&#730;</p>
       </div>
     </div>
   );
