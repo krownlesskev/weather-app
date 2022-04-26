@@ -2,7 +2,10 @@
 
 ## Five Day Forecast Version
 
-This Branch takes the Main branch and expands the code from a single component showing the current temp in a location, to a 5 day forecast for a single location.
+This application uses the openweather API.
+Here we request weather information from the api based on a location and the API provides us contextual data.
+We store the data into states and then render the data to our application front-end.
+
 
 The goal of this assessment is to replicate a front-end application presented by hatchways.
 
