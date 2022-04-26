@@ -68,7 +68,6 @@ function App() {
   useEffect(() => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Winnipeg&appid=${apiKey}&units=metric`)
       .then((res) => {
-        console.log(res.data);
         setMinTemp(Math.round(res.data.main.temp_min));
         setMaxTemp(Math.round(res.data.main.temp_max));
         setWeatherIcon(res.data.weather[0].icon);
