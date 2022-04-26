@@ -12,6 +12,7 @@ const WeatherComponent = ({
   day1,
   day2,
   day3,
+  today
 }) => {
   const currentDate = new Date();
   let currentDayOfTheWeekNumber = currentDate.getDay();
@@ -61,7 +62,7 @@ const WeatherComponent = ({
   }
 
   return (
-    <div className='weather-component-container'>
+    <div className={today ? 'weather-component-card-container-today' : 'weather-component-card-container'}>
       <h1>{currentDayOfTheWeek}</h1>
       <div className='weather-icon'>
         <img src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="Weather Icon" />
@@ -142,12 +143,14 @@ function App() {
 
   return (
     <div className='app-container'>
-      {/* The Weather Component takes the states defined above and uses them as props */}
-      <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon}/>
-      <WeatherComponent minTemp={minTemp0} maxTemp={maxTemp0} weatherIcon={weatherIcon0} day0 />
-      <WeatherComponent minTemp={minTemp1} maxTemp={maxTemp1} weatherIcon={weatherIcon1} day1 />
-      <WeatherComponent minTemp={minTemp2} maxTemp={maxTemp2} weatherIcon={weatherIcon2} day2 />
-      <WeatherComponent minTemp={minTemp3} maxTemp={maxTemp3} weatherIcon={weatherIcon3} day3 />
+      <div className='weather-component-container'>
+        {/* The Weather Component takes the states defined above and uses them as props */}
+        <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon} today />
+        <WeatherComponent minTemp={minTemp0} maxTemp={maxTemp0} weatherIcon={weatherIcon0} day0 />
+        <WeatherComponent minTemp={minTemp1} maxTemp={maxTemp1} weatherIcon={weatherIcon1} day1 />
+        <WeatherComponent minTemp={minTemp2} maxTemp={maxTemp2} weatherIcon={weatherIcon2} day2 />
+        <WeatherComponent minTemp={minTemp3} maxTemp={maxTemp3} weatherIcon={weatherIcon3} day3 />
+      </div>
     </div>
   );
 }
