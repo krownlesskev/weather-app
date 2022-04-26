@@ -57,20 +57,38 @@ function App() {
   // Because this is a frontend excercise, I am unable to define my apikey in an enviroment variable.
   // If this had been a fullstack app, I could have stored it on my backend server
   const apiKey = '3f6820661329be846a6d89b4fa860d8f';
-  const [minTemp, setMinTemp] = useState(0);
-  const [maxTemp, setMaxTemp] = useState(0);
-  const [weatherIcon, setWeatherIcon] = useState('');
+  const [currentMinTemp, setCurrentMinTemp] = useState(0);
+  const [currentMaxTemp, setCurrentMaxTemp] = useState(0);
+  const [currentWeatherIcon, setCurrentWeatherIcon] = useState('');
+
+  const [minTemp0, setMinTemp0] = useState(0);
+  const [maxTemp0, setMaxTemp0] = useState(0);
+  const [weatherIcon0, setWeatherIcon0] = useState('');
+
+  const [minTemp1, setMinTemp1] = useState(0);
+  const [maxTemp1, setMaxTemp1] = useState(0);
+  const [weatherIcon1, setWeatherIcon1] = useState('');
+
+  const [minTemp2, setMinTemp2] = useState(0);
+  const [maxTemp2, setMaxTemp2] = useState(0);
+  const [weatherIcon2, setWeatherIcon2] = useState('');
+
+  const [minTemp3, setMinTemp3] = useState(0);
+  const [maxTemp3, setMaxTemp3] = useState(0);
+  const [weatherIcon3, setWeatherIcon3] = useState('');
 
 
-  // This API call will run when the App component is rendered
-  // Once it is run, it will pull data from the API and assign it to appropriate states
-  // The location is hardcoded for the purpose of this excercise : Winnipeg
+
+/* This first useEffect makes a get request for the CURRENT weather and assigns
+the proper DATA into the predefined states above, This information is then used
+to render a weather component on the App */
   useEffect(() => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Winnipeg&appid=${apiKey}&units=metric`)
       .then((res) => {
-        setMinTemp(Math.round(res.data.main.temp_min));
-        setMaxTemp(Math.round(res.data.main.temp_max));
-        setWeatherIcon(res.data.weather[0].icon);
+        console.log(res.data);
+        setCurrentMinTemp(res.data.main.temp_min);
+        setCurrentMaxTemp(res.data.main.temp_max);
+        setCurrentWeatherIcon(res.data.weather[0].icon)
       });
   }, []);
 
@@ -78,8 +96,8 @@ function App() {
 
   return (
     <div className='app-container'>
-      {/* The Weather Component takes those states and uses them as props */}
-      <WeatherComponent minTemp={minTemp} maxTemp={maxTemp} weatherIcon={weatherIcon} />
+      {/* The Weather Component takes the states defined above and uses them as props */}
+      <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon} />
     </div>
   );
 }
