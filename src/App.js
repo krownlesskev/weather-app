@@ -79,15 +79,40 @@ function App() {
 
 
 
-/* This first useEffect makes a get request for the CURRENT weather and assigns
-the proper DATA into the predefined states above, This information is then used
-to render a weather component on the App */
+  /* 
+  This first useEffect makes a get request for the CURRENT weather and assigns
+  the proper DATA into the predefined states above, This information is then used
+  to render a weather component on the App 
+  */
   useEffect(() => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Winnipeg&appid=${apiKey}&units=metric`)
       .then((res) => {
-        setCurrentMinTemp(res.data.main.temp_min);
-        setCurrentMaxTemp(res.data.main.temp_max);
-        setCurrentWeatherIcon(res.data.weather[0].icon)
+        setCurrentMinTemp(Math.round(res.data.main.temp_min));
+        setCurrentMaxTemp(Math.round(res.data.main.temp_max));
+        setCurrentWeatherIcon(res.data.weather[0].icon);
+      });
+  }, []);
+
+  /*
+  The second useEffect makes a get request for the NEXT FIVE DAYS and assigns
+  the data to the states defined above. These starts are used also to render
+  weather components on the app
+   */
+  useEffect(() => {
+    Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Winnipeg&appid=${apiKey}&units=metric`)
+      .then((res) => {
+        setMinTemp0(Math.round(res.data.list[0].main.temp_min));
+        setMaxTemp0(Math.round(res.data.list[0].main.temp_max));
+        setWeatherIcon0(res.data.list[0].weather[0].icon);
+        setMinTemp1(Math.round(res.data.list[6].main.temp_min));
+        setMaxTemp1(Math.round(res.data.list[6].main.temp_max));
+        setWeatherIcon1(res.data.list[6].weather[0].icon);
+        setMinTemp2(Math.round(res.data.list[14].main.temp_min));
+        setMaxTemp2(Math.round(res.data.list[14].main.temp_max));
+        setWeatherIcon2(res.data.list[14].weather[0].icon);
+        setMinTemp3(Math.round(res.data.list[22].main.temp_min));
+        setMaxTemp3(Math.round(res.data.list[22].main.temp_max));
+        setWeatherIcon3(res.data.list[22].weather[0].icon);
       });
   }, []);
 
@@ -97,6 +122,10 @@ to render a weather component on the App */
     <div className='app-container'>
       {/* The Weather Component takes the states defined above and uses them as props */}
       <WeatherComponent minTemp={currentMinTemp} maxTemp={currentMaxTemp} weatherIcon={currentWeatherIcon} />
+      <WeatherComponent minTemp={minTemp0} maxTemp={maxTemp0} weatherIcon={weatherIcon0} />
+      <WeatherComponent minTemp={minTemp1} maxTemp={maxTemp1} weatherIcon={weatherIcon1} />
+      <WeatherComponent minTemp={minTemp2} maxTemp={maxTemp2} weatherIcon={weatherIcon2} />
+      <WeatherComponent minTemp={minTemp3} maxTemp={maxTemp3} weatherIcon={weatherIcon3} />
     </div>
   );
 }
