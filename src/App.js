@@ -30,6 +30,10 @@ const WeatherComponent = ({
     currentDayOfTheWeekNumber = currentDate.getDay() + 4;
   }
 
+  if (currentDayOfTheWeekNumber > 6) {
+    currentDayOfTheWeekNumber = 0;
+  }
+
 
 
   // This switch statement works in correalation with the IMG tag below, the url acts as a get request
