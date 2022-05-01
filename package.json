@@ -1,5 +1,5 @@
 { "homepage": "https://krownlesskev.github.io/weather-app",
-  "name": "hatchways-frontend-practice",
+  "name": "weather-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
