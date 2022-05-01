@@ -15,24 +15,37 @@ const WeatherComponent = ({
   today
 }) => {
   const currentDate = new Date();
-  let currentDayOfTheWeekNumber = currentDate.getDay();
+  let currentDayOfTheWeekNumber = 0;
   let currentDayOfTheWeek = '';
 
 
   // This if statement determines which day of the week it is based on the day# prop passed to the component
   if (day0) {
-    currentDayOfTheWeekNumber = currentDate.getDay() + 1;
+    currentDayOfTheWeekNumber++;
   } else if (day1) {
-    currentDayOfTheWeekNumber = currentDate.getDay() + 2;
+    for (let i = 0; i < 2; i++) {
+      currentDayOfTheWeekNumber++;
+    }
   } else if (day2) {
-    currentDayOfTheWeekNumber = currentDate.getDay() + 3;
+    for (let i = 0; i < 3; i++) {
+      currentDayOfTheWeekNumber++;
+    }
   } else if (day3) {
-    currentDayOfTheWeekNumber = currentDate.getDay() + 4;
+    for (let i = 0; i < 4; i++) {
+      currentDayOfTheWeekNumber++;
+    }
   }
 
-  if (currentDayOfTheWeekNumber > 6) {
+  if (currentDayOfTheWeekNumber === 7) {
     currentDayOfTheWeekNumber = 0;
+  } else if (currentDayOfTheWeekNumber === 8) {
+    currentDayOfTheWeekNumber = 1
+  } else if (currentDayOfTheWeekNumber === 9) {
+    currentDayOfTheWeekNumber = 2
+  } else if (currentDayOfTheWeekNumber === 10) {
+    currentDayOfTheWeekNumber = 3
   }
+
 
 
 
