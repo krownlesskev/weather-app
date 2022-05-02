@@ -15,7 +15,7 @@ const WeatherComponent = ({
   today
 }) => {
   const currentDate = new Date();
-  let currentDayOfTheWeekNumber = 0;
+  let currentDayOfTheWeekNumber = currentDate.getDay();
   let currentDayOfTheWeek = '';
 
 
@@ -39,11 +39,11 @@ const WeatherComponent = ({
   if (currentDayOfTheWeekNumber === 7) {
     currentDayOfTheWeekNumber = 0;
   } else if (currentDayOfTheWeekNumber === 8) {
-    currentDayOfTheWeekNumber = 1
+    currentDayOfTheWeekNumber = 1;
   } else if (currentDayOfTheWeekNumber === 9) {
-    currentDayOfTheWeekNumber = 2
+    currentDayOfTheWeekNumber = 2;
   } else if (currentDayOfTheWeekNumber === 10) {
-    currentDayOfTheWeekNumber = 3
+    currentDayOfTheWeekNumber = 3;
   }
 
 
