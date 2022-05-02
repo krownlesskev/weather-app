@@ -8,4 +8,8 @@ We store the data into states and then render the data to our application front-
 
 Currently I have hard coded the location to Winnipeg, MB where I am located.
 
-Clone the repo and run npm start, or visit the gh pages for the project to see a live demo.
+## `DEMO Link:`
+
+https://krownlesskev.github.io/weather-app/
+
+You can also clone the repo and run `npm start`.
